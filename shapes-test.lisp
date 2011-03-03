@@ -20,6 +20,30 @@
                   (draw-circle img y x rad r g b))))
       img)))
 
+(defun test-shapes ()
+  (declare (optimize (speed 3) (safety 0)))
+  (let ((height 600) (width 1000))
+    (let ((img (make-8-bit-rgb-image height width)))
+      (declare (type 8-bit-rgb-image img))
+      (fill-image img 10 10 20)
+      (loop for i below 100
+         do (let ((y (random height))
+                  (x (random width))
+                  (rad (random 100))
+                  (r (random 256))
+                  (g (random 256))
+                  (b (random 256))
+                  (square (random 2))
+                  (fill (> (random 1.d0) .66d0)))
+              (if (plusp square)
+                  (if fill
+                      (opticl::fill-rectangle img (- y rad) (- x rad) (+ y rad) (+ x rad) r g b)
+                      (draw-rectangle img (- y rad) (- x rad) (+ y rad) (+ x rad) r g b))
+                  (if fill
+                      (opticl::fill-circle img y x rad r g b)
+                      (draw-circle img y x rad r g b)))))
+      img)))
+
 (defun write-circle-images ()
   (let ((img (test-circles)))
     (write-jpeg-file (output-image "circles.jpeg") img)
