@@ -16,7 +16,7 @@
   (read-jpeg-file (test-image "truck.jpeg")))
 
 (write-png-file
- (output-image "truck-convolve.png")
+ (output-image "truck-sharpen")
  (opticl:sharpen-image *truck*))
 
 (write-png-file
