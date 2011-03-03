@@ -4,6 +4,10 @@
 (defparameter *tower*
   (read-jpeg-file (test-image "tower-gray.jpg")))
 
+(defparameter *edge-kernel* #2A((0 1 0)
+                                (1 -4 1)
+                                (0 1 0)))
+
 (write-png-file
  (output-image "tower-convolve.png")
  (opticl::discrete-convolve *tower* *edge-kernel*))
@@ -13,13 +17,10 @@
 
 (write-png-file
  (output-image "truck-convolve.png")
- (opticl::discrete-convolve *truck* *sharpen-kernel*))
+ (opticl:sharpen-image *truck*))
 
 (write-png-file
  (output-image "truck-blur.png")
  (opticl::blur-image *truck*))
 
-(write-png-file
- (output-image "truck-emboss.png")
- (opticl::emboss-image *truck*))
 
