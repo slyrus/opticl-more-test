@@ -20,7 +20,7 @@
                   (draw-circle img y x rad r g b))))
       img)))
 
-(defun test-shapes ()
+(defun test-circles-and-squares ()
   (declare (optimize (speed 3) (safety 0)))
   (let ((height 600) (width 1000))
     (let ((img (make-8-bit-rgb-image height width)))
