@@ -2,4 +2,4 @@
 ;;; See COPYRIGHT file for details.
 
 (cl:defpackage :opticl-test
-  (:use #:cl #:opticl))
+  (:use #:cl #:opticl #:opticl-color))
