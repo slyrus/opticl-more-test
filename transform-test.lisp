@@ -47,10 +47,10 @@
 (defparameter *circles* (test-circles))
 (defparameter *transformed*
   (let ((xfrm (make-affine-transformation :theta 0.2d0)))
-    (time (transform-image *circles* xfrm :interpolate :bilinear))))
+    (time (transform-image *circles* xfrm))))
 
-(write-png-file (output-image "circles2.png") *circles*)
-(write-png-file (output-image "transformed-circles2.png") *transformed*)
+(write-image-file (output-image "circles2.png") *circles*)
+(write-image-file (output-image "transformed-circles2.png") *transformed*)
 
 (defparameter *q*
   #+nil (make-8-bit-gray-image 4 4 :initial-contents '((1 2 3 4) (5 6 7 8) (9 10 11 12) (13 14 15 16)))
@@ -64,24 +64,24 @@
 
 (defparameter *q-prime*
   (let ((xfrm (make-affine-transformation :theta 0.2d0)))
-    (transform-image *q* xfrm :u '(-4d0 . 4d0) :v '(-4d0 . 4d0) :x '(-4d0 . 4d0) :y '(-4d0 . 4d0) :interpolate :bilinear)))
+    (transform-image *q* xfrm :u '(-4d0 . 4d0) :v '(-4d0 . 4d0) :x '(-4d0 . 4d0) :y '(-4d0 . 4d0))))
 
-(write-png-file (output-image "resized-circles2.png") (resize-image *circles* 960 1280))
+(write-image-file (output-image "resized-circles2.png") (resize-image *circles* 960 1280))
 
-(write-png-file (output-image "q-prime.png") *q-prime*)
+(write-image-file (output-image "q-prime.png") *q-prime*)
 
 
 
 (defparameter *cropped-salad*
   (let ((img (read-jpeg-file (test-image "salad.jpg"))))
-    (let ((cropped (opticl::crop-image img 400 200 600 400)))
-      (write-png-file (output-image "cropped-salad.png") cropped)
+    (let ((cropped (crop-image img 400 200 600 400)))
+      (write-image-file (output-image "cropped-salad.png") cropped)
       cropped)))
 
-(let ((transform (make-affine-transformation :x-scale 1.5d0 :y-scale 1.5d0)))
+(let ((transform (make-affine-transformation :x-scale 2.0d0 :y-scale 2.0d0)))
   (let ((bigimg
-         (transform-image *cropped-salad* transform :interpolate :bilinear)))
-    (write-png-file (output-image "salad-big.jpg") bigimg)))
+         (transform-image *cropped-salad* transform)))
+    (write-image-file (output-image "salad-big.png") bigimg)))
 
 (let ((transform (make-affine-transformation
                   :x-scale 1.2d0 :y-scale 1.1d0
@@ -89,8 +89,8 @@
                   :theta (* -45.0d0 (/ 180.0d0) pi)
                   :x-shift 40 :y-shift 40)))
   (let ((transimg
-         (transform-image *cropped-salad* transform :interpolate :bilinear)))
-    (write-png-file (output-image "salad-trans.jpg") transimg)))
+         (transform-image *cropped-salad* transform)))
+    (write-image-file (output-image "salad-trans.png") transimg)))
 
 (let ((transform (make-affine-transformation
                   :theta (/ pi 8)
@@ -98,12 +98,12 @@
                   :theta (* 45.0d0 (/ 180.0d0) pi)
                   )))
   (let ((transimg
-         (transform-image *cropped-salad* transform :interpolate :bilinear)))
-    (write-png-file (output-image "salad-trans.jpg") transimg)))
+         (transform-image *cropped-salad* transform)))
+    (write-image-file (output-image "salad-trans.png") transimg)))
 
 (let ((transform (make-affine-transformation :x-scale 2d0 :y-scale 2d0)))
   (let ((transimg
-         (transform-image *cropped-salad* transform :interpolate :bilinear)))
-    (write-png-file (output-image "cropped-salad-double.jpg") transimg)))
+         (transform-image *cropped-salad* transform)))
+    (write-image-file (output-image "cropped-salad-double.png") transimg)))
 
 
