@@ -10,17 +10,19 @@
 
 (write-png-file
  (output-image "tower-convolve.png")
- (opticl::discrete-convolve *tower* *edge-kernel*))
+ (discrete-convolve *tower* *edge-kernel*))
 
 (defparameter *truck*
   (read-jpeg-file (test-image "truck.jpeg")))
 
 (write-png-file
- (output-image "truck-sharpen")
- (opticl:sharpen-image *truck*))
+ (output-image "truck-sharpen.jpeg")
+ (sharpen-image *truck*))
 
 (write-png-file
  (output-image "truck-blur.png")
- (opticl::blur-image *truck*))
+ (blur-image *truck*))
 
-
+(write-png-file
+ (output-image "truck-edge.jpeg")
+ (discrete-convolve *truck* *edge-kernel*))
