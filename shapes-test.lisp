@@ -1,24 +1,23 @@
 
 (in-package #:opticl-test)
 
-(defun test-circles ()
+(defun test-circles (&key (height 480) (width 640))
   (declare (optimize (speed 3) (safety 0)))
-  (let ((height 480) (width 640))
-    (let ((img (make-8-bit-rgb-image height width)))
-      (declare (type 8-bit-rgb-image img))
-      (fill-image img 20 20 90)
-      (loop for i below 100
-         do (let ((y (random height))
-                  (x (random width))
-                  (rad (random 100))
-                  (r (random 256))
-                  (g (random 256))
-                  (b (random 256))
-                  (fill (random 2)))
-              (if (plusp fill)
-                  (opticl::fill-circle img y x rad r g b)
-                  (draw-circle img y x rad r g b))))
-      img)))
+  (let ((img (make-8-bit-rgb-image height width)))
+    (declare (type 8-bit-rgb-image img))
+    (fill-image img 20 20 90)
+    (loop for i below 100
+       do (let ((y (random height))
+                (x (random width))
+                (rad (random 100))
+                (r (random 256))
+                (g (random 256))
+                (b (random 256))
+                (fill (random 2)))
+            (if (plusp fill)
+                (fill-circle img y x rad r g b)
+                (draw-circle img y x rad r g b))))
+    img))
 
 (defun test-circles-and-squares ()
   (declare (optimize (speed 3) (safety 0)))
@@ -37,10 +36,10 @@
                   (fill (> (random 1.d0) .66d0)))
               (if (plusp square)
                   (if fill
-                      (opticl::fill-rectangle img (- y rad) (- x rad) (+ y rad) (+ x rad) r g b)
+                      (fill-rectangle img (- y rad) (- x rad) (+ y rad) (+ x rad) r g b)
                       (draw-rectangle img (- y rad) (- x rad) (+ y rad) (+ x rad) r g b))
                   (if fill
-                      (opticl::fill-circle img y x rad r g b)
+                      (fill-circle img y x rad r g b)
                       (draw-circle img y x rad r g b)))))
       img)))
 
@@ -64,7 +63,7 @@
                   (b (random 256))
                   (fill (random 2)))
               (if (plusp fill)
-                  (opticl::fill-circle img y x rad r g b #xff)
+                  (fill-circle img y x rad r g b #xff)
                   (draw-circle img y x rad r g b #xff))))
       img)))
 
@@ -74,6 +73,32 @@
     (write-png-file (output-image "circles2.png") img)))
   
 (write-circle-images)
+
+(defun test-circles-3 (&key
+                       (height 768)
+                       (width 1024) 
+                       (radius 10)
+                       (spacing 12)
+                       (background '(10 10 10)))
+  (declare (optimize (speed 3) (safety 0))
+           (type fixnum height width radius spacing))
+  (let ((img (make-8-bit-rgb-image height width)))
+    (declare (type 8-bit-rgb-image img))
+    (fill-image* img background)
+    (let* ((unit (+ (ash radius 1) spacing))
+          (half (ash unit -1)))
+      (loop for i fixnum below height by unit
+         do (loop for j fixnum below width by unit
+               do 
+                 (fill-circle img
+                              (the fixnum (+ half i))
+                              (the fixnum (+ half j))
+                              (the fixnum (- radius (random 4)))
+                              (random 256)
+                              (random 256)
+                              (random 256)))))
+    img))
+
 
 (defun test-shapes ()
   (declare (optimize (speed 3) (safety 0)))
@@ -101,7 +126,7 @@
                   (k (random 256))
                   (fill (random 2)))
               (if (plusp fill)
-                  (opticl::fill-circle img y x rad k)
+                  (fill-circle img y x rad k)
                   #+nil (draw-circle img y x rad k))))
       img)))
   
