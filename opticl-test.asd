@@ -11,4 +11,5 @@
    (:file "opticl-test")
    (:file "shapes-test")
    (:file "transform-test")
+   (:file "threshold-test")
    (:file "gamma-test")))
