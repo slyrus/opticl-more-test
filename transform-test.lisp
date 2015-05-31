@@ -64,7 +64,11 @@
 
 (defparameter *q-prime*
   (let ((xfrm (make-affine-transformation :theta 0.2d0)))
-    (transform-image *q* xfrm :u '(-4d0 . 4d0) :v '(-4d0 . 4d0) :x '(-4d0 . 4d0) :y '(-4d0 . 4d0))))
+    (transform-image *q* xfrm
+                     :pre-x-bounds '(-4d0 . 4d0)
+                     :pre-y-bounds '(-4d0 . 4d0)
+                     :post-x-bounds '(-4d0 . 4d0)
+                     :post-y-bounds '(-4d0 . 4d0))))
 
 (write-image-file (output-image "resized-circles2.png") (resize-image *circles* 960 1280))
 
