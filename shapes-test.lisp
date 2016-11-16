@@ -2,7 +2,8 @@
 (in-package #:opticl-more-test)
 
 (defun test-circles (&key (height 480) (width 640))
-  (declare (optimize (speed 3) (safety 0)))
+  (declare (optimize (speed 3) (safety 0))
+           (type (unsigned-byte 16) height width))
   (let ((img (make-8-bit-rgb-image height width)))
     (declare (type 8-bit-rgb-image img))
     (fill-image img 20 20 90)
@@ -85,7 +86,7 @@
   (let ((img (make-8-bit-rgb-image height width)))
     (declare (type 8-bit-rgb-image img))
     (fill-image* img background)
-    (let* ((unit (+ (ash radius 1) spacing))
+    (let* ((unit (+ (logand most-positive-fixnum (ash radius 1)) spacing))
           (half (ash unit -1)))
       (loop for i fixnum below height by unit
          do (loop for j fixnum below width by unit
