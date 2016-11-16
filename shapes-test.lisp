@@ -1,5 +1,5 @@
 
-(in-package #:opticl-test)
+(in-package #:opticl-more-test)
 
 (defun test-circles (&key (height 480) (width 640))
   (declare (optimize (speed 3) (safety 0)))

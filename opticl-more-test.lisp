@@ -1,19 +1,19 @@
 ;;; Copyright (c) 2011 Cyrus Harmon, All rights reserved.
 ;;; See COPYRIGHT file for details.
 
-(in-package #:opticl-test)
+(in-package #:opticl-more-test)
 
 (defun test-image (filename)
   (reduce #'merge-pathnames (list filename "images/")
           :from-end t
           :initial-value (asdf:component-pathname
-                          (asdf:find-system "opticl-test"))))
+                          (asdf:find-system "opticl-more-test"))))
 
 (defun output-image (filename)
   (reduce #'merge-pathnames (list filename "output/")
           :from-end t
           :initial-value (asdf:component-pathname
-                          (asdf:find-system "opticl-test"))))
+                          (asdf:find-system "opticl-more-test"))))
 
 (defun tiff-image (filename)
   (reduce #'merge-pathnames (list filename "images/")
@@ -38,9 +38,8 @@
 (defun test-tiff-read-16-bit-rgb ()
   (let* ((file (test-image "truck-16.tiff"))
          (img (read-tiff-file file)))
-    (declare (ignore img))
-    #+nil (let ((out (output-image "truck-16.jpeg")))
-            (write-jpeg-file out img))))
+    (let ((out (output-image "truck-16.tiff")))
+      (write-tiff-file out img))))
 
 (defun test-jpeg-read-8-bit-rgb ()
   (let* ((file (test-image "truck.jpeg"))
@@ -58,6 +57,12 @@
   (let* ((file (test-image "truck.png"))
          (img (read-png-file file)))
     (let ((out (output-image "truck.jpeg")))
+      (write-jpeg-file out img))))
+
+(defun test-png-read-8-bit-rgb-1-bit-alpha ()
+  (let* ((file (test-image "png-8-1.png"))
+         (img (read-png-file file)))
+    (let ((out (output-image "png-8-1.png")))
       (write-jpeg-file out img))))
 
 ;;; TIFF Files
@@ -113,6 +118,13 @@
   (let* ((file (test-image "truck.tiff"))
          (img (read-tiff-file file)))
     (let ((out (output-image "truck-little-endian.tiff")))
+      (write-tiff-file out img :byte-order :little-endian))))
+
+;; this fails!!!
+(defun test-tiff-write-16-bit-rgb-little-endian ()
+  (let* ((file (test-image "truck-16.tiff"))
+         (img (read-tiff-file file)))
+    (let ((out (output-image "truck-16-little-endian.tiff")))
       (write-tiff-file out img :byte-order :little-endian))))
 
 (defun test-tiff-write-8-bit-rgb-read-lzw ()

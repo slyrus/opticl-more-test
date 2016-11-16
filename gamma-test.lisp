@@ -1,5 +1,5 @@
 
-(in-package #:opticl-test)
+(in-package #:opticl-more-test)
 
 (defun test-gamma ()
   (declare (optimize (debug 3)))

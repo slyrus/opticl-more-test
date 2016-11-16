@@ -1,5 +1,5 @@
 
-(in-package :opticl-test)
+(in-package :opticl-more-test)
 
 (write-image-file
  (output-image "truck-gray-threshold.png")

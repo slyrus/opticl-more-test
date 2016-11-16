@@ -1,5 +1,5 @@
 
-(in-package #:opticl-test)
+(in-package #:opticl-more-test)
 
 (assert
  (equalp '(10d0 10d0)

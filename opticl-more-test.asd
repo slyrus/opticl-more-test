@@ -1,6 +1,6 @@
 
-(asdf:defsystem :opticl-test
-  :name "opticl-test"
+(asdf:defsystem :opticl-more-test
+  :name "opticl-more-test"
   :description "Test library for opticl. Kept separate from opticl to keep opticl size down."
   :author "Cyrus Harmon <ch-lisp@bobobeach.com>"
   :licence "BSD"
@@ -9,7 +9,7 @@
   :serial t
   :components
   ((:file "package")
-   (:file "opticl-test")
+   (:file "opticl-more-test")
    (:file "shapes-test")
    (:file "transform-test")
    (:file "threshold-test")

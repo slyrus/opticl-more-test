@@ -1,5 +1,5 @@
 
-(in-package :opticl)
+(in-package :opticl-more-test)
 
 (let ((height 16) (width 16))
   (let ((img (make-8-bit-gray-image height width)))

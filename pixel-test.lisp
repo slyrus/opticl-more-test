@@ -1,4 +1,5 @@
-(in-package :opticl)
+
+(in-package :opticl-more-test)
 
 (defun test-me2 (img)
   (declare (optimize (speed 3) (safety 0)))
