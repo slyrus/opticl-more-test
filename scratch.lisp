@@ -4,8 +4,6 @@
 #+nil (define-symbol-macro *dark-blue* (values 5 5 80))
 #+nil (define-symbol-macro *yellow* (values 255 255 20))
 
-(defparameter *monkey* opticl-color::*green*)
-
 (defparameter *test-image-1*
   (let* ((height 200)
          (width 300)
