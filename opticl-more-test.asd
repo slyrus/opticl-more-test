@@ -13,4 +13,17 @@
    (:file "shapes-test")
    (:file "transform-test")
    (:file "threshold-test")
-   (:file "gamma-test")))
+   (:file "gamma-test"))
+  :in-order-to ((test-op (test-op :opticl-more-test/test))))
+
+(asdf:defsystem :opticl-more-test/test
+  :depends-on (:opticl-more-test :fiveam)
+  :serial t
+  :default-component-class cl-source-file
+  :components
+  ((:module :test
+            :components ((:file "opticl-more-test"))))
+  :perform (test-op (o c)
+                    (uiop:symbol-call :fiveam '#:run! :opticl-more-test)))
+
+
