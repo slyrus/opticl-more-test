@@ -254,3 +254,26 @@
       (write-image-file out img)))
 
 
+(defun test-coerce-16-bit-rgb-to-8-bit-rgb ()
+  (let* ((file (test-image "truck-16.tiff"))
+         (img (read-tiff-file file)))
+    (let ((out (output-image "truck-8-coerced-rgb.tiff")))
+      (write-image-file out (coerce-image img '8-bit-rgb-image)))))
+
+(defun test-coerce-16-bit-rgb-to-8-bit-rgba ()
+  (let* ((file (test-image "truck-16.tiff"))
+         (img (read-tiff-file file)))
+    (let ((out (output-image "truck-8-coerced-rgba.tiff")))
+      (write-image-file out (coerce-image img '8-bit-rgba-image)))))
+
+(defun test-coerce-8-bit-rgb-to-16-bit-rgb ()
+  (let* ((file (test-image "truck.tiff"))
+         (img (read-tiff-file file)))
+    (let ((out (output-image "truck-16-coerced-rgb.tiff")))
+      (write-image-file out (coerce-image img '16-bit-rgb-image)))))
+
+(defun test-coerce-8-bit-rgb-to-16-bit-rgba ()
+  (let* ((file (test-image "truck.tiff"))
+         (img (read-tiff-file file)))
+    (let ((out (output-image "truck-16-coerced-rgba.tiff")))
+      (write-image-file out (coerce-image img '16-bit-rgba-image)))))
