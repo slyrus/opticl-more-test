@@ -110,6 +110,7 @@
       (horizontal-line img 20 20 180 #x75 #x12 #xB0)
       (vertical-line img 20 180 180 #x75 #x12 #xB0)
       (draw-line img 300 20 10 100 #x40 #x80 #xA0)
+      (draw-line* img 400 20 110 100 (list #xA0 #x80 #x40))
       (draw-triangle img 200 20 10 80 100 160 #x90 #x30 #x00)
       img)))
 
