@@ -1,6 +1,6 @@
 
 
-(cl:defpackage :opticl-more-test
+(cl:defpackage :opticl-more-test-test
   (:use #:cl #:opticl #:opticl-color)
   (:import-from #:fiveam
                 #:def-suite
@@ -8,7 +8,7 @@
                 #:test
                 #:is))
 
-(cl:in-package #:opticl-more-test)
+(cl:in-package #:opticl-more-test-test)
 
 (defun test-image (filename)
   (reduce #'merge-pathnames (list filename "test/images/")
