@@ -247,11 +247,6 @@
     (let ((out (output-image "mushroom-out.gif")))
       (write-image-file out img))))
 
-(let* ((file (test-image "truck.tiff"))
-         (img (read-image-file file)))
-    (let ((out (output-image "truck.jpeg")))
-      (write-image-file out img)))
-
 (defun test-coerce-16-bit-rgb-to-8-bit-rgb ()
   (let* ((file (test-image "truck-16.tiff"))
          (img (read-tiff-file file)))
@@ -282,18 +277,28 @@
     (let ((out (output-image "truck-gray-alpha-to-rgb.jpeg")))
       (write-image-file out (coerce-image img 'rgb-image)))))
 
-(let* ((file (test-image "truck-gray-alpha.png"))
-         (img (read-png-file file)))
-    (let ((out (output-image "truck-gray-alpha-to-rgb.jpeg")))
-      (write-image-file out (coerce-image img 'rgb-image))))
-
-(let* ((file (test-image "truck-gray-alpha.png"))
-         (img (read-png-file file)))
-  (coerce-image img 'rgb-image))
-
 (defun test-coerce-grayscale-alpha-image-to-8-bit-rgb-image ()
   (let* ((file (test-image "truck-gray-alpha.png"))
          (img (read-png-file file)))
     (let ((out (output-image "truck-gray-alpha-to-8-bit-rgb.jpeg")))
       (write-image-file out (coerce-image img '8-bit-rgb-image)))))
+
+(defun test-coerce-rgba-image-to-8-bit-gray-image ()
+  (let* ((file (test-image "truck.png"))
+         (img (read-png-file file)))
+    (let ((out (output-image "truck-rgba-to-8-bit-gray.jpeg")))
+      (write-image-file out (coerce-image img '8-bit-gray-image)))))
+
+(defun test-coerce-rgba-image-to-8-bit-gray-image-tiff ()
+  (let* ((file (test-image "truck.png"))
+         (img (read-png-file file)))
+    (let ((out (output-image "truck-rgba-to-8-bit-gray.tiff")))
+      (write-image-file out (coerce-image img '8-bit-gray-image)))))
+
+(defun test-coerce-rgba-image-to-8-bit-gray-alpha-image ()
+  (let* ((file (test-image "truck.png"))
+         (img (read-png-file file)))
+    (let ((out (output-image "truck-rgba-to-8-bit-gray-alpha.tiff")))
+      (write-image-file out (coerce-image img '8-bit-gray-alpha-image)))))
+
 
